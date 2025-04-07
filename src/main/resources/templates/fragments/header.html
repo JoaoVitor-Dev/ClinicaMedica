@@ -1,0 +1,36 @@
+<header th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-collapse navbar-expand navbar-dark bg-dark"  data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand link-light" href="/">Clínica Médica</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" style="color: aliceblue">
+                    <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">
+                        <a class="nav-link link-light"  href="/consulta/list">Consultas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light"  href="/paciente/list">Pacientes</a>
+                    </li>
+                        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
+                            <a class="nav-link link-light" href="/medico/list">Médicos</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="/agendamento/list">Agendamento</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-item dropdown">
+                <button class="btn btn-sm btn-dark btn-lg" id="dropdown04" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span>Usuário: </span> <span sec:authentication="name"></span> </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                    <li><form th:action="@{/logout}" method="post"><button class="btn btn-sm dropdown-item" type="submit">Sair</button></form></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+

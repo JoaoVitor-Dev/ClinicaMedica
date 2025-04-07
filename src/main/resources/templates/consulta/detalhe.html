@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container">
+        <br><br>
+        <div class="container ">
+            <h1>Detalhes da Consulta</h1>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <label>Identificador:
+                        <input class="form-control" type="text" th:field="${consulta.id}" disabled>
+                    </label>
+                    <label>Valor:
+                        <input class="form-control" type="text" th:field="${consulta.valor}" disabled>
+                    </label>
+                    <label>Paciente:
+                        <input class="form-control" type="text" th:field="${consulta.paciente.nome}" disabled>
+                    </label>
+                    <br>
+                    <hr>
+                    <label>Médico:
+                        <input class="form-control" type="text" th:field="${consulta.medico.nome}" disabled>
+                    </label>
+                    <label>Data:
+                        <input class="form-control" type="text" th:field="${consulta.data}" disabled>
+                    </label>
+                    <label>Observação:
+                        <input class="form-control" type="text" th:field="${consulta.observacao}" disabled>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()">Voltar</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

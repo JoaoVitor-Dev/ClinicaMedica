@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <br><br>
+    <div class="container">
+        <h1>Cadastro de Paciente</h1>
+        <hr>
+
+        <form th:action="@{${paciente.id == null} ? '/paciente/save' : '/paciente/update'}" th:object="${paciente}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="col-12">
+                <input class="form-control" type="text" th:field="*{nome}"  placeholder="Nome"  th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
+            </div>
+            <br>
+            <div class="col-12">
+                <input class="form-control" type="text" th:field="*{telefone}"  placeholder="Telefone" th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></label>
+
+            </div>
+            <br>
+            <div class="col-12">
+                <input class="form-control" type="text" th:field="*{cpf}"  placeholder="CPF" th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></label>
+            </div>
+            <br>
+            <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()">Voltar</a>
+            <input class="btn btn-success btn-sm elevate" type="submit" value="Salvar">
+            <br>
+            <br>
+        </form>
+    </div>
+</main>
+</body>
+</html>

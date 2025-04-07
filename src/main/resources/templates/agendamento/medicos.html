@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container-fluid">
+        <br><br>
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <h2>Lista de Médicos</h2>
+                <div class="d-flex align-items-center" style="gap: 3px">
+                    <form method="get" action="/agendamento/pesquisapornome">
+                        <input class="" name="nome" placeholder="Nome do Médico">
+                            <button class="btn btn-sm btn-dark elevate" type="submit">Pesquisar</button>
+                            <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()">Voltar</a>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-sm" border="1">
+                <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tr th:each="m : ${medico}">
+                    <td th:text="${m.nome}"></td>
+                    <td> <a class="btn btn-info btn-sm elevate" th:href="@{/agendamento/{id}(id=${m.id})}"><img src="/images/clinical_notes.svg"></img>Agendar</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

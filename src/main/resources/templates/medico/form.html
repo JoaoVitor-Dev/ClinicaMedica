@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <br><br>
+    <div class="container">
+        <h1>Cadastro de Médico(a)</h1>
+        <hr>
+        <form th:action="@{${medico.id == null} ? '/medico/save' : '/medico/update'}" th:object="${medico}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{nome}"  placeholder="Nome completo" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{crm}"  placeholder="CRM" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{cpf}"  placeholder="CPF" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{crm}"></div>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" th:field="*{telefone}"  placeholder="Telefone" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                </div>
+            </div>
+            <br>
+            <a class="btn btn-sm btn-primary elevate" href="/medico/list">Voltar</a>
+            <input class="btn btn-success btn-sm elevate" type="submit" value="Enviar">
+            <br>
+            <br>
+        </form>
+
+    </div>
+</main>
+</body>
+</html>

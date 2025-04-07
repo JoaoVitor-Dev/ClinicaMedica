@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container">
+        <br><br>
+        <div class="container">
+
+            <div class="d-flex justify-content-between">
+
+
+                    <div class="d-flex align-items-center">
+                        <h1>Consultas do médico(a) <span th:text="${medico.nome}"></span> | </h1>
+                        <span class="badge text-bg-warning">Total R$: <span th:text="${#numbers.formatDecimal(medico.valorTotal(),1, 2, 'COMMA')}"></span> </span>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()"> Voltar</a>
+                    </div>
+            </div>
+
+            <hr>
+            <table class="table table-sm" border="1">
+                <thead class="table-dark">
+                <tr>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Paciente</th>
+                    <th>Detalhes</th>
+                </tr>
+                </thead>
+                <tr th:each="m : ${medico.getConsultas()}">
+                    <td th:text="${m.valor}"></td>
+                    <td th:text="${#temporals.format(m.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${m.paciente.getNome()}"></td>
+                    <td><a class="btn btn-dark btn-sm" th:href="@{/consulta/{id}(id=${m.id})}">Detalhes</a></td>
+                </tr>
+            </table>
+
+        </div>
+        <br>
+
+    </div>
+</main>
+</body>
+</html>

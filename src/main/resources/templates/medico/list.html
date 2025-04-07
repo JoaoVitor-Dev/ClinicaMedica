@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container-fluid">
+        <br><br>
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <h2>Lista de Médicos</h2>
+                <div class="d-flex align-items-center" style="gap: 3px">
+                    <form method="get" action="/medico/pesquisapornome">
+                        <input class="" name="nome" placeholder="Nome do Médico">
+                        <button class="btn btn-sm btn-dark elevate" type="submit">Pesquisar</button>
+                    </form>
+                    <a class="btn btn-success btn-sm elevate " href="/medico/form">+ Novo Médico</a>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-sm" border="1">
+                <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>CRM</th>
+                    <th>CPF</th>
+                    <th>Consultas</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tr th:each="m : ${medico}">
+                    <td th:text="${m.nome}"></td>
+                    <td th:text="${m.crm}"></td>
+                    <td th:text="${m.cpf}"></td>
+                    <td> <a class="btn btn-info btn-sm elevate" th:href="@{/medico/{id}(id=${m.id})}"><img src="/images/clinical_notes.svg"></img>Visualizar</a></td>
+                    <td> <a class="btn btn-warning btn-sm elevate" style="margin-right: 1px" th:href="@{/medico/editMedico/{id}(id=${m.id})}"><img src="/images/edit_FILL0_wght200_GRAD0_opsz24.svg"></a><a class="btn btn-danger btn-sm elevate" onclick="return window.confirm('Tem certeza que deseja excluir este Médico?')" th:href="@{/medico/removeMedico/{id}(id=${m.id})}"><img src="/images/delete_FILL0_wght200_GRAD0_opsz24.svg"></a></td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="mt-1 " th:if="${mensagemerro!=null}">
+            <p class="pop-up error" th:text="${mensagemerro}"></p>
+        </div>
+        <div class="mt-1 " th:if="${mensagemsucesso!=null}">
+            <p class="pop-up sucesso" th:text="${mensagemsucesso}"></p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

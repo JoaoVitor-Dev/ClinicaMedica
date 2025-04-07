@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container-fluid">
+        <br><br>
+        <div class="container " xmlns:sec="http://www.w3.org/1999/xhtml">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-start">
+                    <h2>Consultas realizadas </h2>
+                    <div class="d-flex align-items-center">
+                        <span class="badge text-bg-warning" style="margin-left: 5px"> Total R$: <span th:text="${#numbers.formatDecimal(vTotal,1, 2, 'COMMA')}"></span> </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center" style="gap: 3px">
+                    <form method="get" action="/consulta/pesquisapordata">
+                        <input type="date" name="data">
+                        <button type="submit" class="btn btn-sm btn-dark elevate">
+                            Pesquisar
+                        </button>
+                    </form>
+                    <a class="btn btn-success btn-sm elevate" href="/consulta/form">+ Novo Consulta</a>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-sm" border="1">
+                <thead class="table-dark">
+                <tr>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Detalhes</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tr xmlns:sec="http://www.w3.org/1999/xhtml" class="teste" th:each="c : ${consulta}">
+                    <td th:text="${c.paciente.getNome()}"></td>
+                    <td th:text="${c.medico.getNome()}"></td>
+                    <td th:text="${c.valor}"></td>
+                    <td th:text="${#temporals.format(c.data, 'dd/MM/yyyy')}"></td>
+                    <td><a class="btn btn-secondary btn-sm elevate" th:href="@{/consulta/{id}(id=${c.id})}">Detalhes</a></td>
+                    <td ><a class="btn btn-warning btn-sm elevate" sec:authorize="hasAnyRole('ADMIN')" style="margin-right: 1px" th:href="@{/consulta/editConsulta/{id}(id=${c.id})}"><img src="/images/edit_FILL0_wght200_GRAD0_opsz24.svg"></a><a class="btn btn-danger btn-sm elevate" sec:authorize="hasAnyRole('ADMIN')" onclick="return window.confirm('Tem certeza que deseja excluir esta Consulta?')" th:href="@{/consulta/removeConsulta/{id}(id=${c.id})}"><img src="/images/delete_FILL0_wght200_GRAD0_opsz24.svg"></a></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

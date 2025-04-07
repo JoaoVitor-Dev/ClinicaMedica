@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container">
+        <br><br>
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <h2>Consultas do paciente <span th:text="${paciente.nome}"></span> | </h2>
+                    <span class="badge text-bg-warning" style="margin-left: 5px">Total R$: <span th:text="${#numbers.formatDecimal(paciente.valorTotal(),1, 2, 'COMMA')}"></span> </span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-sm btn-primary elevate" href="/paciente/list">Voltar</a>
+                </div>
+            </div>
+            <hr>
+            <table class="table table-sm" border="1">
+                <thead class="table-dark">
+                <tr>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Médico</th>
+                    <th>Detalhes</th>
+                </tr>
+                </thead>
+                <tr th:each="m : ${paciente.getConsultas()}">
+                    <td th:text="${m.valor}"></td>
+                    <td th:text="${#temporals.format(m.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${m.medico.getNome()}"></td>
+                    <td><a class="btn btn-outline-info btn-sm " th:href="@{/consulta/{id}(id=${m.id})}">Detalhes</a></td>
+                </tr>
+            </table>
+        <br>
+        </div>
+    </div>
+</main>
+</body>
+</html>

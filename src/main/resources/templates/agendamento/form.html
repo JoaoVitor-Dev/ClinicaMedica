@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+
+<main class="container">
+    <br><br>
+    <div class="container">
+        <h1>Agendamento de Consulta</h1>
+        <hr>
+        <form  xmlns:sec="http://www.w3.org/1999/xhtml" th:action="@{${agendamento.id == null} ? '/agendamento/save' : '/agendamento/update'}" th:object="${agendamento}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Nome do Paciente: </label>
+                    <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>Data de Nascimento:
+                    <input class="form-control" type="date" th:field="*{dataNascimento}" placeholder="data" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></div>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Telefone:</label>
+                    <input class="form-control" type="text" th:field="*{telefone}"  placeholder="Fone" th:errorclass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label" for="idData">Data consulta:
+                    <select class="form-select" id="idData" name="idAgenda" required th:errorclass="is-invalid"
+                            th:field="*{agenda.id}">
+                        <option value="">Selecione uma data</option>
+                        <th:block th:each="dataList : ${agenda}">
+                            <option th:text="${dataList.horarioInicio}" th:value="${dataList.id}"></option>
+                        </th:block>
+                    </select>
+                    </label>
+                </div>
+
+
+            </div>
+            <br>
+
+            <div class="form-floating">
+                <textarea class="form-control" th:field="*{observacoes}"  placeholder="Observações" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Observações</label>
+            </div>
+
+            <br>
+            <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()">Voltar</a>
+            <input sec:authorize="hasAnyRole('ADMIN')" class="btn btn-success btn-sm elevate" type="submit" value="Agendar consulta">
+            <br>
+        </form>
+    </div>
+
+</main>
+
+</body>
+
+</html>

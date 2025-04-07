@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<body>
+<main>
+    <div class="container">
+        <br><br>
+        <div class="container ">
+            <h1>Detalhes do Agendamento</h1>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <label>Nome do Paciente:
+                        <input class="form-control" type="text" th:field="${agendamento.nome}" disabled>
+                    </label>
+                    <label>Telefone:
+                        <input class="form-control" type="text" th:field="${agendamento.telefone}" disabled>
+                    </label>
+                    <label>Nascimento:
+                        <input class="form-control" type="text" th:field="${agendamento.dataNascimento}" disabled>
+                    </label>
+                    <label>Médico:
+                        <input class="form-control" type="text" th:field="${agendamento.agenda.medico.nome}" disabled>
+                    </label>
+                    <br>
+                    <hr>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" th:field="${agendamento.observacoes}" placeholder="" id="floatingTextarea2Disabled" style="height: 100px" disabled>Disabled textarea with some text inside</textarea>
+                        <label for="floatingTextarea2Disabled">Observações</label>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <a class="btn btn-sm btn-primary elevate" onclick="window.history.back()">Voltar</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+
+<main>
+    <div class="container-fluid">
+        <br><br>
+        <div class="container">
+            <div class="d-flex justify-content-between">
+
+                <h2>Pacientes cadastrados</h2>
+
+                <div class="d-flex justify-content-between" style="gap: 3px">
+                    <div class="d-flex align-items-center" >
+                        <form method="get" action="/paciente/pesquisapornome">
+                            <input class="" name="nome" placeholder="Nome do Paciente">
+                            <button class="btn btn-sm btn-dark elevate" type="submit">Pesquisar</button>
+                        </form>
+                    </div>
+                    <br><br>
+                    <div class="d-flex align-items-center">
+                        <a class="btn btn-success btn-sm elevate " href="/paciente/form">+ Novo Paciente</a>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+                    <table class="table table-sm " border="1">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Consultas</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="p : ${paciente}">
+                            <td th:text="${p.nome}"></td>
+                            <td th:text="${p.telefone}"></td>
+                            <td th:text="${p.cpf}"></td>
+                            <td><a class="btn btn-info btn-sm elevate" th:href="@{/paciente/{id}(id=${p.id})}"><img src="/images/clinical_notes.svg">Visualizar</a></td>
+                            <td> <a class="btn btn-warning btn-sm elevate" style="margin-right: 1px" th:href="@{/paciente/editPaciente/{id}(id=${p.id})}"><img src="/images/edit_FILL0_wght200_GRAD0_opsz24.svg"></a><a class="btn btn-danger btn-sm elevate" onclick="return window.confirm('Tem certeza que deseja excluir este Paciente?')" th:href="@{/paciente/removePaciente/{id}(id=${p.id})}"><img src="/images/delete_FILL0_wght200_GRAD0_opsz24.svg"></a></td>
+                        </tr>
+                    </table>
+            <div class="mt-1 " th:if="${mensagemerro!=null}">
+                <p class="pop-up error" th:text="${mensagemerro}"></p>
+            </div>
+            <div class="mt-1 " th:if="${mensagemsucesso!=null}">
+                <p class="pop-up sucesso" th:text="${mensagemsucesso}"></p>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+</body>
+</html>

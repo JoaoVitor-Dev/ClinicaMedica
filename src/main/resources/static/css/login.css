@@ -1,0 +1,177 @@
+@font-face {
+    font-family: SegoeUI;
+    src:
+            local("Segoe UI Light"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff2) format("woff2"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.woff) format("woff"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/light/latest.ttf) format("truetype");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+            local("Segoe UI"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2) format("woff2"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff) format("woff"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.ttf) format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: SegoeUI;
+    src:
+            local("Segoe UI Semibold"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2) format("woff2"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff) format("woff"),
+            url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.ttf) format("truetype");
+    font-weight: 700;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-container {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 6px 21px -8px hsla(0,0%,44%,.82);
+    margin: 6px 4px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.box-header {
+    align-items: center;
+    background-color: #11142d;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-div {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 6px;
+    padding: 60px;
+}
+
+.form-div > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-div > div > img {
+    width: 180px;
+    margin-bottom: 25px;
+}
+
+.form-div label {
+    margin: 10px 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #707070;
+}
+
+.form-div input {
+    height: 25px;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    box-shadow: 0 1px 4px #00000040;
+    outline: none;
+}
+
+.form-div input:focus{
+    border-color: #30B7EE;
+}
+
+.btn {
+    width: fit-content;
+    height: fit-content;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 5px;
+    margin: 3px;
+    transition: 150ms;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #e3e3e3;
+    color: rgba(0,0,0,0.8);
+    user-select: none;
+}
+
+.btn:hover {
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.36);
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.success {
+    background-color: #4bd685;
+    color: white;
+}
+
+.d-flex, .row {
+    display: flex;
+}
+
+.h-flex-center {
+    justify-content: center;
+}
+
+.fade_in_scale_apper {
+    animation: fade_in 400ms ease 1, scale_up 400ms ease 1;
+}
+
+@keyframes fade_in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade_out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes scale_up {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

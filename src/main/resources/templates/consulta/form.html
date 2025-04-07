@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+    <main class="container">
+        <br><br>
+        <div class="container">
+            <h1>Cadastro de Consulta</h1>
+            <hr>
+
+            <form xmlns:sec="http://www.w3.org/1999/xhtml" th:action="@{${consulta.id == null} ? '/consulta/save' : '/consulta/update'}" th:object="${consulta}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="row" xmlns:sec="http://www.w3.org/1999/xhtml">
+                    <div class="col-md-6">
+                        <label>Pesquisar Paciente:</label>
+                        <input th:field="*{paciente.nome}" class="form-control" type="text" id="input-paciente" placeholder="Pesquise o Paciente" th:errorclass="is-invalid">
+                        <input th:field="*{paciente.id}" id="id-paciente" type="hidden" th:errorclass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('paciente.id')}"
+                             th:errors="*{paciente.id}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Médico: </label>
+                        <select id="medico" name="medico" th:field="*{medico.id}" class="form-select" th:errorclass="is-invalid">
+                            <option value="">Selecione...</option>
+                            <option th:each="m : ${medico}"
+                                    th:value="${m.id}"
+                                    th:text="${m.nome}">
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('medico.id')}"
+                             th:errors="*{medico.id}">
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Valor da Consulta: </label>
+                        <input class="form-control" type="text" th:field="*{valor}" placeholder="Valor" th:errorclass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label>Data da consulta: </label>
+                        <input class="form-control" type="datetime-local" th:field="*{data}" placeholder="data" th:errorclass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></div>
+                    </div>
+
+                    <br>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <textarea class="form-control" th:field="*{observacao}" placeholder="Observação" th:errorclass="is-invalid" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Observação</label>
+                </div>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}"></div>
+                <br>
+
+                <a class="btn btn-sm btn-primary elevate" href="/consulta/list">Voltar</a>
+
+                <input sec:authorize="hasAnyRole('ADMIN', 'MEDICO')" class="btn btn-success btn-sm elevate" type="submit" value="Enviar">
+
+                <br>
+
+            </form>
+        </div>
+
+
+
+        <section id="fundo" class="modal-wrapper">
+            <div id="modal" class="card" style="">
+                <div class="d-flex justify-content-between">
+                    <div class="col-md-8">
+                        <input id="filtra-paciente" class="form-control" type="text" placeholder="Nome do Paciente">
+                    </div>
+                    <button class="btn btn-sm" type="button" id="btn-close"><img src="/images/close.svg"></button>
+                </div>
+                <br>
+                <table id="table-pacientes" class="table table-sm " border="1">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>CPF</th>
+                    </tr>
+                    </thead>
+                    <tr th:attr="onclick=|capturaPaciente('${p.id}', '${p.nome}' )|"  th:each="p : ${paciente}">
+                        <td th:text="${p.nome}"></td>
+                        <td th:text="${p.telefone}"></td>
+                        <td th:text="${p.cpf}"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+
+
+    </main>
+
+</body>
+</html>
