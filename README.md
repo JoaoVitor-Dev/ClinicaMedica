@@ -33,53 +33,70 @@ com.ifto.clinicamedica/
 │   ├── AgendaController.java             # Controller da Agenda
 │   ├── AgendamentoController.java        # Controller de Agendamento
 │   └── LoginController.java              # Controller da Login
-├── model/                                # Entidades e modelos
-│   ├── Medico.java                       # Entidade médico
-│   ├── Paciente.java                     # Entidade paciente
-│   ├── Consulta.java                     # Entidade consulta
-│   ├── Especialidade.java                # Enum de especialidades médicas
-│   └── Usuario.java                      # Entidade usuário para autenticação
-├── repository/                           # Interfaces de repositório
-│   ├── MedicoRepository.java             # Repositório de médicos
-│   ├── PacienteRepository.java           # Repositório de pacientes
-│   └── ConsultaRepository.java           # Repositório de consultas
-└── service/                              # Camada de serviço
-    ├── MedicoService.java                # Serviço de médicos
-    ├── PacienteService.java              # Serviço de pacientes
-    └── ConsultaService.java              # Serviço de consultas
+├── model/                                # Modelo da Aplicação (Regra de Negócio)
+│   ├── entity/                           # Entidades
+│   │   ├── Agenda.java                   # Entidade Agenda
+│   │   ├── Agendamento.java              # Entidade Agendamento
+│   │   ├── Consulta.java                 # Entidade Consulta
+│   │   ├── Medico.java                   # Entidade Medico
+│   │   ├── Paciente.java                 # Entidade Paciente
+│   │   ├── Perfil.java                   # Entidade Perfil
+│   │   ├── Pessoa.java                   # Entidade Pessoa
+│   │   └── Usuario.java                  # Entidade Usuario
+│   ├── repository/                       # Repositórios
+│   │   ├── AgendamentoRepository.java    # Repositório Agendamento
+│   │   ├── AgendaRepository.java         # Repositório Agenda
+│   │   ├── ConsultaRepository.java       # Repositório Consulta
+│   │   ├── MedicoRepository.java         # Repositório Medico
+│   │   ├── PacienteRepository.java       # Repositório Paciente
+│   │   └── UsuarioRepository.java        # Repositório Usuario
+│   └── security/                         # Segurança
+│       ├── AgendamentoRepository.java    # Configuração de Segurança
+│       └── AgendamentoRepository.java    # Tratamento de Segurança
+└── utils/                                # Arquivos úteis
+    └── GeradorSenha.java                 # Classe de utilidade para Senha em ambiente dev
 ```
 
 ### 📄 Views Thymeleaf (HTML)
 
 ```
 src/main/resources/
-├── application.properties                # Configurações da aplicação
-├── static/                               # Recursos estáticos
-│   ├── css/                              # Estilos CSS
-│   │   ├── bootstrap.min.css             # Framework Bootstrap
-│   │   └── style.css                     # Estilos personalizados
-│   ├── js/                               # JavaScript
-│   │   ├── bootstrap.min.js              # Scripts Bootstrap
-│   │   └── scripts.js                    # Scripts personalizados
-│   └── img/                              # Imagens do sistema
-└── templates/                            # Templates Thymeleaf
-    ├── fragments/                        # Fragmentos reutilizáveis
-    │   ├── header.html                   # Cabeçalho comum
-    │   ├── footer.html                   # Rodapé comum
-    │   ├── sidebar.html                  # Barra lateral
-    │   └── alert.html                    # Mensagens de alerta
-    ├── home.html                         # Página inicial
-    ├── login.html                        # Página de login
-    ├── medico/                           # Views de médicos
-    │   ├── form.html                     # Formulário de cadastro/edição
-    │   └── lista.html                    # Listagem de médicos
-    ├── paciente/                         # Views de pacientes
-    │   ├── form.html                     # Formulário de cadastro/edição
-    │   └── lista.html                    # Listagem de pacientes
-    └── consulta/                         # Views de consultas
-        ├── form.html                     # Formulário de agendamento
-        ├── lista.html                    # Listagem de consultas
-        └── detalhes.html                 # Detalhes da consulta
+├── application.properties                
+├── static/                               
+│   ├── css/                              
+│   │   ├── login.css                    
+│   │   └── style.css                     
+│   ├── js/                              
+│   │   └── script.js                     
+│   └── img/                              
+└── templates/                           
+    ├── agenda/ 
+    │    ├── form.html 
+    │    └── list.html 
+    ├── agendamento/
+    │    ├── detalhe.html
+    |    ├── form.html
+    |    ├── list.html  
+    │    └── medicos.html     
+    ├── consulta/
+    │    ├── detalhe.html
+    |    ├── form.html
+    |    └── list.html                             
+    ├── fragments/
+    │    ├── footer.html
+    |    ├── head.html
+    |    ├── header.html
+    |    └── layout.html     
+    ├── medico/
+    │    ├── consulta.html
+    |    ├── form.html
+    |    └── list.html  
+    ├── paciente/
+    │    ├── consulta.html
+    |    ├── form.html
+    |    └── list.html    
+    ├── home.html
+    └── login.html 
 ```
 
 ## 🚀 Como Executar
@@ -127,7 +144,3 @@ O sistema utiliza Spring Security para autenticação e autorização, com difer
 - Um paciente pode ter **muitas consultas**
 - Uma consulta pertence a **um médico** e **um paciente**
 - Cada médico possui **uma especialidade**
-
-## 🤝 Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir um Pull Request com melhorias ou correções.
