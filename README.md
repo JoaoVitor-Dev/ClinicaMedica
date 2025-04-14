@@ -51,8 +51,8 @@ com.ifto.clinicamedica/
 │   │   ├── PacienteRepository.java       # Repositório Paciente
 │   │   └── UsuarioRepository.java        # Repositório Usuario
 │   └── security/                         # Segurança
-│       ├── AgendamentoRepository.java    # Configuração de Segurança
-│       └── AgendamentoRepository.java    # Tratamento de Segurança
+│       ├── SecurityConfiguration.java    # Configuração de Segurança
+│       └── UsuarioDetailsConfig.java     # Tratamento de Segurança
 └── utils/                                # Arquivos úteis
     └── GeradorSenha.java                 # Classe de utilidade para Senha em ambiente dev
 ```
